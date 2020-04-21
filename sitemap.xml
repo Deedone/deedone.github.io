@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://deedone.github.io/posts/rust-wasm/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://deedone.github.io/posts/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://deedone.github.io/tags/rust/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://deedone.github.io/tags/simulation/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://deedone.github.io/tags/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://deedone.github.io/tags/webassembly/</loc>
+    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://deedone.github.io/about/</loc>
     <lastmod>2020-04-19T16:15:56+03:00</lastmod>
   </url>
@@ -18,16 +48,7 @@
   </url>
   
   <url>
-    <loc>https://deedone.github.io/posts/</loc>
-    <lastmod>2020-04-19T15:53:07+03:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://deedone.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://deedone.github.io/tags/</loc>
   </url>
   
 </urlset>

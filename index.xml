@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>First impressions on Rust and Webassembly</title>
+      <link>https://deedone.github.io/posts/rust-wasm/</link>
+      <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
+      
+      <guid>https://deedone.github.io/posts/rust-wasm/</guid>
+      <description>&lt;p&gt;I implemented Game of Life to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>https://deedone.github.io/about/</link>
       <pubDate>Sun, 19 Apr 2020 16:15:56 +0300</pubDate>

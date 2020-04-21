@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>First impressions on Rust and Webassembly | Tech Adventures</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    
+    
+    <link rel="stylesheet" href="https://deedone.github.io/css/main.min.15431d6c334f65809fe2bc329da3f2c81c6e3027ab1e25b56afb2bb85fa7fd64.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Tech Adventures</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/">Home</a>
+  
+    <a class="color-link nav-link" href="/about">About</a>
+  
+  <a class="color-link nav-link" href="https://deedone.github.io/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://deedone.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">First impressions on Rust and Webassembly</h1>
+    
+    <time>April 20, 2020</time>
+    
+    <div>
+        <p>
+        <p>I implemented Game of Life to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field.</p>
+<iframe src="/wasm-gol/dist" style="width:100%; border:none; overflow: hidden;" onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.clientWidth+60+"px";}(this));'></iframe>
+<p><a href="https://github.com/Deedone/techadv-src/tree/master/static/wasm-gol">Source code</a></p>
+<h2 id="motivation">Motivation</h2>
+<p>I love statically typed languages.
+I love native speed.
+I also love to make cool demos and visualizations and show them to people.
+Web looks like a good platform for this, <strong>but</strong> it&rsquo;s kinda slow.
+JS got a lot faster in the last years (<a href="https://www.youtube.com/watch?v=uMuYaES4W3o">check out this cool talk if you are interested how</a>) but I always felt that it&rsquo;s not enough for me.</p>
+<p align="center">
+<img src="/images/wasm.jpeg">
+</p>
+<p>Here comes <a href="https://en.wikipedia.org/wiki/WebAssembly">WebAssembly</a>.
+It seems to be a perfect solution to this problem.
+Ease of distribution and great visual abilities, while maintaining almost native performance.</p>
+<h3 id="language-choice">Language choice</h3>
+<p>My main experience is in C/C++, a natural decision will be to use them.
+On the other hand since I&rsquo;m already exploring new technologies why not go all the way in.
+I prefer to get a full pack of new skills altogether when learning something.
+It&rsquo;s harder but much more interesting and beneficial in the long term.</p>
+<p>Two main candidates were Rust and Golang.
+I&rsquo;ve had some prior experience with both and I just can&rsquo;t stand Golang.
+I liked the simplicity of it but the inability to compile something with warnings is way too annoying.
+I&rsquo;ve always developed in a fiddly iterative process, with lots of dead code and unused variables.
+Initially it&rsquo;s a mess but when everything starts to work I usually clean it up a little.
+Rust seems to be quite cool tho.
+Fast, flexible, have cool features and still manages to protect you from your stupidity.
+Also quite different (heavily inspired by Haskell I think) from everything that I know so a good opportunity to flex your brain a little.</p>
+<p>Also Rust appears to have decent integration with WebGL, which will allow us to implement many neat things in the future.</p>
+<p align="center">
+<figure align="center" style="text-align:center">
+<img width="70%" src="/images/rust_wasm.png">
+<figcaption>
+<p>Ferris the crab, the Rust mascot</p>
+</figcaption>
+</figure>
+</p>
+<h2 id="current-state">Current state</h2>
+<p>WebAssembly has become quite mature in the past couple of years.
+It&rsquo;s certainly no longer a bleeding-edge technology.
+Build tools became quite sophisticated, so you can build everything with one npm command.</p>
+<p>Directory structure:</p>
+<pre><code>.
+├── src
+|    └── lib.rs
+├── package.json
+├── index.html
+├── index.js
+├── webpack.config.js
+└── cargo.toml
+
+</code></pre><p>Here is my webpack config:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;html-webpack-plugin&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">webpack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">WasmPackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;@wasm-tool/wasm-pack-plugin&#34;</span>);
+
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./index.js&#39;</span>,
+    <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;dist&#39;</span>),
+        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;index.js&#39;</span>,
+    },
+    <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span>({
+            <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;index.html&#39;</span>
+        }),
+        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WasmPackPlugin</span>({
+            <span style="color:#a6e22e">crateDirectory</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#34;.&#34;</span>)
+        })
+    ],
+    <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;development&#39;</span>
+};
+
+
+</code></pre></div><p>The coolest thing is WasmPackPlugin.
+It automatically rebuilds your Rust crate when necessary.</p>
+<p>And package.json:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>,
+    <span style="color:#f92672">&#34;serve&#34;</span>: <span style="color:#e6db74">&#34;webpack-dev-server&#34;</span>
+  },
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;@wasm-tool/wasm-pack-plugin&#34;</span>: <span style="color:#e6db74">&#34;1.0.1&#34;</span>,
+    <span style="color:#f92672">&#34;html-webpack-plugin&#34;</span>: <span style="color:#e6db74">&#34;^3.2.0&#34;</span>,
+    <span style="color:#f92672">&#34;webpack&#34;</span>: <span style="color:#e6db74">&#34;^4.29.4&#34;</span>,
+    <span style="color:#f92672">&#34;webpack-cli&#34;</span>: <span style="color:#e6db74">&#34;^3.1.1&#34;</span>,
+    <span style="color:#f92672">&#34;webpack-dev-server&#34;</span>: <span style="color:#e6db74">&#34;^3.1.0&#34;</span>
+  }
+}
+
+</code></pre></div><p>And cargo.toml :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[package]</span>
+<span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wasm-gol&#34;</span>
+<span style="color:#a6e22e">version</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.1.0&#34;</span>
+
+<span style="color:#66d9ef">[lib]</span>
+<span style="color:#a6e22e">crate-type</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">[&#34;cdylib&#34;]</span>
+
+<span style="color:#66d9ef">[features]</span>
+<span style="color:#a6e22e">default</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">[&#34;console_error_panic_hook&#34;]</span>
+
+<span style="color:#66d9ef">[dependencies]</span>
+<span style="color:#a6e22e">wasm-bindgen</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.2.60&#34;</span>
+<span style="color:#a6e22e">lazy_static</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*&#34;</span>
+<span style="color:#a6e22e">console_error_panic_hook</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">{ version = &#34;0.1.1&#34;, optional = true }</span>
+
+<span style="color:#66d9ef">[dependencies.web-sys]</span>
+<span style="color:#a6e22e">version</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.3.4&#34;</span>
+<span style="color:#a6e22e">features</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">[
+</span><span style="color:#e6db74">  &#34;console&#34;,
+</span><span style="color:#e6db74">  &#34;CanvasRenderingContext2d&#34;,</span>
+<span style="color:#a6e22e">]</span>
+<span style="color:#66d9ef">[profile.release]</span>
+<span style="color:#a6e22e">debug</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">true</span>
+</code></pre></div><p><code>CanvasRenderingContext2d</code> allows to access canvas drawing context directly from rust, which is quite convinient.</p>
+<p>Many people complain about the complexity of debugging Wasm, it wasn&rsquo;t the case for me.
+Perhaps I&rsquo;m lucky, or Rust successfully managed to protect me from my stupidity.
+So I hadn&rsquo;t encountered any cryptic bugs.
+After installing panic hook debugging became trivial.
+Firefox&rsquo;s profiler is also great. I was really surprised when it managed to show me a complete trace of all Wasm calls.</p>
+<p>At first Rust was very hard.
+I spent almost a day battling with borrow-checker.
+But after some time certain things just click in your head and everything falls in place.
+Despite this harshness, Rust compiler is actually pretty friendly.
+It very often shows exact changes that you need to do to fix errors, and have good vibe in general. I especially love smiley faces when everything compiles successfully(maybe wasm-pack prints them, i&rsquo;m not sure).</p>
+<h3 id="performance">Performance</h3>
+<p>Initially I planned to write two versions.
+One in Rust and the other in JS to compare performance.
+But I&rsquo;m to lazy for this, so if you want to compare speeds check out <a href="https://medium.com/@torch2424/webassembly-is-fast-a-real-world-benchmark-of-webassembly-vs-es6-d85a23f8e193">this article</a>.
+Roughly it seems quite faster than the implementation that I wrote a couple years ago in pure js. But you certainly can&rsquo;t rely on that metric.</p>
+<h2 id="results">Results</h2>
+<p>After a couple of days experimenting with Rust+Wasm, it seems to be a good combo.
+Great performance and feature support opens a land of opportunities.
+Build tools are also great and Wasm should now be supported by all major browsers.</p>
+<p>I&rsquo;m pleased with this experience.
+Can totally recommend trying it out if you are bored.
+Maybe someday this will be a new industry standard, who knows&hellip;</p>
+<p><em><strong><em>Remember to create exponentially</em></strong></em></p>
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/rust">#rust</a>
+        
+            <a class="tag" href="/tags/webassembly">#webassembly</a>
+        
+            <a class="tag" href="/tags/simulation">#simulation</a>
+        
+      
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://deedone.github.io/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>
