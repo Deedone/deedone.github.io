@@ -132,6 +132,11 @@
         <p>
         <p>I implemented Game of Life to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field. (Drawing only works from PC, not from mobile devices)</p>
 <iframe src="/wasm-gol/dist/index.html" style="width:100%; border:none; overflow: hidden;" onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.clientWidth+60+"px";}(this));'></iframe>
+<p>PRO TIP: You can toggle the <code>DBG</code> checkbox to enable debug overlay.
+This allows us to see how one of the basics GameOfLife optimization works.
+On each iteration program tracks what cells have changed and in the next iteration processes only the &ldquo;hot&rdquo; ones.
+This trick greatly reduces CPU load.
+Now instead of every cell we check only 10-30% of them and can make game field much bigger without losing FPS.</p>
 <p><a href="https://github.com/Deedone/techadv-src/tree/master/static/wasm-gol">Source code</a></p>
 <h2 id="motivation">Motivation</h2>
 <p>I love statically typed languages.
