@@ -36,7 +36,7 @@ import('./pkg')
         })
 
         reinitBtn.onclick = () => {
-            wasm.init( 200, 200, Math.floor(Math.random() * 999999));
+            wasm.init( w/7, h/7, Math.floor(Math.random() * 999999));
             wasm.draw(ctx, w, h, false);
         }
 
@@ -85,7 +85,7 @@ import('./pkg')
                 requestAnimationFrame(step);
             }
         }
-        wasm.init( 200, 200, Math.floor(Math.random() * 999999));
+        wasm.init( w/7, h/7, Math.floor(Math.random() * 99999));
 
         wasm.draw(ctx, w, h, false);
 
