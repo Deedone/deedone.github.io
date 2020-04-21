@@ -17,7 +17,7 @@
       <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
       
       <guid>https://deedone.github.io/posts/rust-wasm/</guid>
-      <description>&lt;p&gt;I implemented Game of Life to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field. (Drawing only works from PC, not from mobile devices)&lt;/p&gt;</description>
+      <description>&lt;p&gt;I implemented &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34;&gt;Conway&amp;rsquo;s Game of Life&lt;/a&gt; to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field. (Drawing only works from PC, not from mobile devices)&lt;/p&gt;</description>
     </item>
     
     <item>
