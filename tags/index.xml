@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Tech Adventures</title>
-    <link>https://deedone.github.io/tags/</link>
+    <link>https://techadv.xyz/tags/</link>
     <description>Recent content in Tags on Tech Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Apr 2020 20:45:02 +0300</lastBuildDate>
     
-	<atom:link href="https://deedone.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://techadv.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>rust</title>
-      <link>https://deedone.github.io/tags/rust/</link>
+      <link>https://techadv.xyz/tags/rust/</link>
       <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
       
-      <guid>https://deedone.github.io/tags/rust/</guid>
+      <guid>https://techadv.xyz/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>simulation</title>
-      <link>https://deedone.github.io/tags/simulation/</link>
+      <link>https://techadv.xyz/tags/simulation/</link>
       <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
       
-      <guid>https://deedone.github.io/tags/simulation/</guid>
+      <guid>https://techadv.xyz/tags/simulation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>webassembly</title>
-      <link>https://deedone.github.io/tags/webassembly/</link>
+      <link>https://techadv.xyz/tags/webassembly/</link>
       <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
       
-      <guid>https://deedone.github.io/tags/webassembly/</guid>
+      <guid>https://techadv.xyz/tags/webassembly/</guid>
       <description></description>
     </item>
     
