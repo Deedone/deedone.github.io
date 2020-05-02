@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>WebGL tutorial: image processing | Tech Adventures</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+    <meta
+
+    name="description"
+    content="In this WebGL tutorial you will learn how to use the power of GPU from javascript. With some WebGL shader examples such as blur and twist."/>
+
+    
+    
+    
+    <link rel="stylesheet" href="https://techadv.xyz/css/main.min.cf11ec552c63f5eeb3f27e29f50227596070c1d3c68b53476cf9b41a798264bd.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163808068-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163808068-1');
+</script>
+
+      </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Tech Adventures</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/">Home</a>
+  
+    <a class="color-link nav-link" href="/about">About</a>
+  
+  <a class="color-link nav-link" href="https://techadv.xyz/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    <a class="social-icon" href="https://t.me/deedone" target="_blank" rel="noopener" title="Telegram">
+	    <svg fill="#ABABAB" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 19.976562 3.1210938 L 19.611328 3.2695312 C 19.611328 3.2695312 6.6375504 8.5740484 2.6132812 10.267578 L 2.0019531 10.525391 L 2.0019531 12.779297 L 6.9472656 14.755859 L 8.6796875 19.996094 L 10.251953 20.005859 L 12.955078 17.720703 L 16.355469 20.996094 L 18.808594 20.996094 L 21.964844 3.875 L 19.976562 3.1210938 z M 19.646484 5.4179688 L 17.146484 18.980469 L 13.044922 15.029297 L 10.224609 17.410156 L 11 14.375 L 17.28125 8 L 17.082031 7.7988281 C 17.082031 7.7988281 10.706702 11.473998 8.0019531 13.023438 L 4.5371094 11.638672 C 9.0770415 9.7455758 18.697943 5.8058761 19.646484 5.4179688 z"/></svg>
+    </a>
+    
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://techadv.xyz/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">WebGL tutorial: image processing</h1>
+    
+    <time>April 25, 2020</time>
+    
+    <div>
+        <p>
+        <p>In this tutorial you will learn how to use the power of GPU from javascript.
+With some WebGL shader examples such as blur and twist.</p>
+<p>WebGL API is very similar to OpenGL, the are almost identical.
+They also use the same language for writing shaders, so you can use some OpenGL tutorials too.
+We will cover basic stuff like initialization and writing simple fragment shaders.
+If you want more detailed and deep explanations, there is a good book called &ldquo;Learn WebGL&rdquo;, check it out.</p>
+<p>Here are examples of what we will do:</p>
+<h3 id="image-twist">Image twist</h3>
+<iframe style="border:none" src="/test-webgl/dist/" width="100%" onload="javascript:(function(o){o.style.height=o.contentWindow.document.body.clientWidth+60+'px';}(this));"></iframe>
+<h3 id="image-blur">Image blur</h3>
+<iframe style="border:none" src="/test-webgl/dist/?blur" width="100%" onload="javascript:(function(o){o.style.height=o.contentWindow.document.body.clientWidth+60+'px';}(this));"></iframe>
+<p>Drag slider to see effects.</p>
+<p><a href="https://github.com/Deedone/techadv-src/tree/master/static/test-webgl">SOURCE CODE</a></p>
+<p>If you want to skip theory and build setup click <a href="#code">here</a>.</p>
+<h1 id="theory">Theory</h1>
+<p>Everybody who tries to implement good graphics quickly understands he now has severe performance issues.
+The amount of computation required to produce any decent scene is simply huge.
+You need to process every polygon (some models have thousands of them) to project them on screen.
+Then you need to rasterize them. Apply textures, shading, reflections for every pixel on the screen.
+And you also need to do all of this stuff at least 30 times in a second.
+CPUs just can&rsquo;t handle this very well.
+Especially when using some scripting language with lots of overhead for every operation.</p>
+<p>Luckily people found a solution and invented GPUs.
+All of the tasks described above are highly parallel in their nature.
+Polygons and pixels usually do not depend on each other and can be easily (and much more efficiently) processed at the same time.
+GPUs are especially good at this.
+While modern processors usually have 4-8 cores, any decent graphics card has thousands of them.
+They are much less complex then CPU cores and highly optimized for specific 3D-related calculations.</p>
+<p align="center">
+<figure style="width:100%;margin:0;">
+<img src="/images/cpu-gpu.png" width="100%">
+</figure>
+</p>
+<p><a href="https://www.khronos.org/webgl/">WebGL</a> is a web standard for low-level 3D graphics API.
+It allows you to run your code directly on GPU, giving you great power of it.
+You write all your rendering code in OpenGL Shading Language aka GLSL.
+It&rsquo;s not hard and very similar to C.
+Programs written in GLSL usually called shaders.
+They are compiled and loaded into a graphics card in runtime using WebGL API.</p>
+<h1 id="preparation">Preparation</h1>
+<p>Technically you don&rsquo;t need to install anything.
+But without a proper web server you won&rsquo;t be able to load images and additional scripts.
+So it&rsquo;s a good idea to have one.
+I will use webpack-dev-server, it&rsquo;s easy to setup and use.</p>
+<p>First thing that you need to do is create an empty folder and run <code>npm init</code> inside.
+You can skip all of the questions from NPM.<br>
+Then add this lines to <code>package.json</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;scripts&#34;</span>: {
+        <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>,
+        <span style="color:#f92672">&#34;serve&#34;</span>: <span style="color:#e6db74">&#34;webpack-dev-server&#34;</span>
+    },
+    <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+        <span style="color:#f92672">&#34;copy-webpack-plugin&#34;</span>: <span style="color:#e6db74">&#34;^5.1.1&#34;</span>,
+        <span style="color:#f92672">&#34;html-webpack-plugin&#34;</span>: <span style="color:#e6db74">&#34;^4.2.0&#34;</span>,
+        <span style="color:#f92672">&#34;raw-loader&#34;</span>: <span style="color:#e6db74">&#34;^4.0.1&#34;</span>,
+        <span style="color:#f92672">&#34;webpack&#34;</span>: <span style="color:#e6db74">&#34;^4.43.0&#34;</span>,
+        <span style="color:#f92672">&#34;webpack-cli&#34;</span>: <span style="color:#e6db74">&#34;^3.3.11&#34;</span>,
+        <span style="color:#f92672">&#34;webpack-dev-server&#34;</span>: <span style="color:#e6db74">&#34;^3.10.3&#34;</span>
+    }
+
+}
+</code></pre></div><p>Run <code>npm install</code> and create a new file named <code>webpack.config.js</code>.<br>
+Here is the contents of webpack config:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;html-webpack-plugin&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">webpack</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;webpack&#39;</span>);
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CopyWebpackPlugin</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;copy-webpack-plugin&#39;</span>);
+
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./index.js&#39;</span>,
+    <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;dist&#39;</span>),
+        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;index.js&#39;</span>,
+    },
+    <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">HtmlWebpackPlugin</span>({
+            <span style="color:#a6e22e">template</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;index.html&#39;</span>
+        }),
+        <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">CopyWebpackPlugin</span>([{
+            <span style="color:#a6e22e">from</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;styles/*.css&#34;</span>,
+            <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>
+        }])
+    ],
+    <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;development&#39;</span>
+};
+</code></pre></div><p>Now you can start dev server by running <code>npm run serve</code> and open <a href="http://localhots:8080">http://localhots:8080</a>.
+I will not explain this all deeply, as this is not the main topic.
+Everything should work out of the box.</p>
+<h1 id="code">Code</h1>
+<p>Let&rsquo;s deal with HTML right away.
+All we need is a canvas, so here it is.</p>
+<h4 id="indexhtml">index.html</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">head</span>&gt;
+    &lt;<span style="color:#f92672">title</span>&gt;Webgl&lt;/<span style="color:#f92672">title</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+
+    &lt;<span style="color:#f92672">canvas</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;c&#34;</span>&gt;&lt;/<span style="color:#f92672">canvas</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;slidecontainer&#34;</span>&gt;
+        &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span> <span style="color:#a6e22e">min</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">max</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;30&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;slider&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>Just basic HTML template with a canvas and slider that we can use.
+Now, it&rsquo;s time to initialize WebGL.</p>
+<h4 id="indexjs">index.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// Using webpack&#39;s raw loader to get shader code as JS string.
+</span><span style="color:#75715e">// Much more convenient than writing them directly as string 
+</span><span style="color:#75715e">// or loading in runtime
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">vert</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;!raw-loader!./vertex.glsl&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">frag</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;!raw-loader!./fragment.glsl&#39;</span>;
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">prepareWebGL</span>(<span style="color:#a6e22e">gl</span>) {
+  <span style="color:#75715e">// Creating and compiling vertex shadr
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">vertSh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createShader</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">VERTEX_SHADER</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">shaderSource</span>(<span style="color:#a6e22e">vertSh</span>, <span style="color:#a6e22e">vert</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">compileShader</span>(<span style="color:#a6e22e">vertSh</span>);
+  <span style="color:#75715e">// This line is very import 
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// By default if shader compilation fails,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// WebGL will not show you error,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// so debugging is almost impossible
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">getShaderInfoLog</span>(<span style="color:#a6e22e">vertSh</span>));
+
+  <span style="color:#75715e">// Creating and compiling fragment shader
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fragSh</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createShader</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">FRAGMENT_SHADER</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">shaderSource</span>(<span style="color:#a6e22e">fragSh</span>, <span style="color:#a6e22e">frag</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">compileShader</span>(<span style="color:#a6e22e">fragSh</span>);
+  <span style="color:#75715e">// This line is very import 
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// By default if shader compilation fails,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// WebGL will not show you error,
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// so debugging is almost impossible
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">getShaderInfoLog</span>(<span style="color:#a6e22e">fragSh</span>));
+
+  <span style="color:#75715e">// Linking program and passing it to GPU
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">prog</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createProgram</span>();
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">attachShader</span>(<span style="color:#a6e22e">prog</span>, <span style="color:#a6e22e">vertSh</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">attachShader</span>(<span style="color:#a6e22e">prog</span>, <span style="color:#a6e22e">fragSh</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">linkProgram</span>(<span style="color:#a6e22e">prog</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">useProgram</span>(<span style="color:#a6e22e">prog</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">viewport</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">width</span>,<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">height</span>);
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">prog</span>;
+}
+</code></pre></div><p>Error checks are omitted for clarity.<br>
+So, how exactly WebGL works?
+It&rsquo;s like a separate world.
+You need to pass some programs and data there in a special manner.
+Then you GPU will execute your program with your data and give back an image.</p>
+<div align="center">
+<figure style="width:100%;margin:0;">
+<img src="/images/webgl.png" width="100%">
+<figcaption align="center">
+WebGL graphics pipeline
+</figcaption>
+</figure>
+</div>
+<p>Every program consists of two parts: vertex and fragment shaders.
+Vertex shader is applied to every vertex or just point in space, that you pass in.
+Here you perform all 3D stuff such as transformations, projections, and clipping.
+Then GPU rasterizes your shapes, which means filling them with pixels aka fragments.
+<em>Actually fragments are not exactly pixels.
+But for the scope of this tutorial they can be used interchangeably.</em>
+After rasterization every fragment is passed through fragment shader to determine it&rsquo;s color.
+Finally everything is drawn to the framebuffer and displayed on the screen.</p>
+<p>It&rsquo;s important to understand that your shaders are executed <strong>in parallel</strong>.
+On <strong>every</strong> vertex and <strong>every</strong> fragment <strong>independently</strong>.
+Also, shaders produce values not by returning them but setting special variables.
+Such as <code>gl_Position</code> and <code>gl_FragColor</code>, treat them as return statements.</p>
+<p>For the sake of simplicity we will mostly play with fragment shaders and stay in a 2D world.
+Here is simple pass-through vertex shader:</p>
+<h4 id="vertexglsl">vertex.glsl</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#75715e">// This is our input from js world</span>
+<span style="color:#66d9ef">attribute</span> <span style="color:#66d9ef">vec2</span> coords;
+<span style="color:#75715e">// This is output for the fragment shader</span>
+<span style="color:#75715e">// varying variables are a little special</span>
+<span style="color:#75715e">// you will see why later</span>
+<span style="color:#66d9ef">varying</span> <span style="color:#66d9ef">highp</span> <span style="color:#66d9ef">vec2</span> vTextureCoord;
+
+<span style="color:#66d9ef">void</span> main (<span style="color:#66d9ef">void</span>) {
+    <span style="color:#75715e">// Texture and verticies have different coordinate spaces</span>
+    <span style="color:#75715e">// we do this to invert Y axis</span>
+    vTextureCoord <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>coords;
+
+    <span style="color:#75715e">// Setting vertix position for shape assembler </span>
+    <span style="color:#75715e">// GLSL has many convenient vector functions</span>
+    <span style="color:#75715e">// here we extending 2D coords vector to 4D with 2 values</span>
+    <span style="color:#75715e">// 0.0 is a Z coordinate</span>
+    <span style="color:#75715e">// 1.1 is a W, special value needed for 3D math</span>
+    <span style="color:#75715e">// just leave it 1 for now</span>
+    gl_Position <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec4</span>(coords, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">1.0</span>);
+}
+</code></pre></div><p>Later we will fill our canvas with a rectangle. This is needed to have some plane for applying textures.<br>
+To understand how fragment shader works you need to comprehend varying variables.
+Let&rsquo;s imagine you have two vertices in a line.
+In vertex shader you set some varying variable to red color from one of them and to green from another.
+All fragments between these two points will get different values when reading this varying variable.
+It will smoothly transition from red to green.
+So if you set fragment color to the value of this variable you will get something like this.
+Such behavior is called interpolation.</p>
+<div align="center">
+<figure style="width:100%;margin:0;">
+<img src="/images/gradient.png" width="100%">
+<figure>
+<figcaption>
+Color interpolated from red to green
+<figcaption>
+</div>
+<p>We will also use a couple of uniform variables.
+But no need to worry, they are quite simple.
+Uniform variables are just constant parameters.
+Useful for passing global setting and texture ids.</p>
+<h4 id="fragmentglsl">fragment.glsl</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#75715e">// Setting precision for float calculations</span>
+<span style="color:#66d9ef">precision</span> <span style="color:#66d9ef">mediump</span> <span style="color:#66d9ef">float</span>;
+<span style="color:#75715e">// This is input from vertex shader</span>
+<span style="color:#66d9ef">varying</span> <span style="color:#66d9ef">highp</span> <span style="color:#66d9ef">vec2</span> vTextureCoord;
+<span style="color:#75715e">// Samplers are needeed to select textures</span>
+<span style="color:#75715e">// actually its integers</span>
+<span style="color:#66d9ef">uniform</span> <span style="color:#66d9ef">sampler2D</span> uSampler;
+<span style="color:#75715e">// This will tell us how much to screw the image</span>
+<span style="color:#66d9ef">uniform</span> <span style="color:#66d9ef">float</span> iter;
+
+<span style="color:#66d9ef">vec2</span> coords;
+<span style="color:#66d9ef">float</span> x;
+<span style="color:#66d9ef">float</span> y;
+<span style="color:#66d9ef">float</span> l;
+<span style="color:#66d9ef">void</span> main(<span style="color:#66d9ef">void</span>){
+
+    <span style="color:#75715e">// Getting distance from origin</span>
+    l <span style="color:#f92672">=</span> length(vTextureCoord);
+    <span style="color:#75715e">// Just renaming to reduce typing</span>
+    x <span style="color:#f92672">=</span> vTextureCoord[<span style="color:#ae81ff">0</span>];
+    y <span style="color:#f92672">=</span> vTextureCoord[<span style="color:#ae81ff">1</span>];
+    <span style="color:#75715e">// Rotating point around origin </span>
+    coords[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> cos(iter <span style="color:#f92672">*</span> l) <span style="color:#f92672">-</span> y <span style="color:#f92672">*</span> sin(iter <span style="color:#f92672">*</span> l);
+    coords[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> sin(iter <span style="color:#f92672">*</span> l) <span style="color:#f92672">+</span> y <span style="color:#f92672">*</span> cos(iter <span style="color:#f92672">*</span> l);
+
+    <span style="color:#75715e">// Transforming coordinates from GL space to texture space</span>
+    <span style="color:#75715e">// All math can be done directly to vectors</span>
+    coords <span style="color:#f92672">=</span> coords <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>;
+
+    <span style="color:#75715e">// Fragment shader must set this variable</span>
+    gl_FragColor <span style="color:#f92672">=</span> texture2D(uSampler, coords);
+}
+</code></pre></div><p>The key here is to understand that angle of point movements is dependent on it&rsquo;s distance to the center.
+This will result in a cool effect of texture twisting and sucking in a black hole.
+If we delete the <code>* l</code> part, the whole thing will just rotate.</p>
+<p>Our program is now ready, compiled, and loaded.
+Time to deal with the data.
+Here we are loading vertex coordinates to WebGL memory.
+Just two triangles to cover the canvas so we have some surface for texturing.
+Be aware that WebGL coordinates work different from canvas coordinates.
+Unlike canvas, it&rsquo;s origin is at the center and all coordinates are normalized.
+So no matter what aspect ratio your canvas has, X and Y are always in -1 to 1 range.
+Also Y coordinate is pointing upwards.</p>
+<div align="center">
+<figure style="width:100%;margin:0;">
+<img src="/images/square.png.svg" style="max-width:100%">
+<figcaption style="margin-top:0px"> Like this </figcaption>
+</figure>
+</div>
+<h4 id="indexjs-1">index.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setArrays</span>(<span style="color:#a6e22e">gl</span>, <span style="color:#a6e22e">prog</span>){
+  <span style="color:#75715e">// Getting WebGL buffer object
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">vertex_buffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createBuffer</span>();
+  <span style="color:#75715e">// This is 2 triangles that form a square
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Each triangle consists of 3 points
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Each point consists of two numbers: X and Y coordinates
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// GL coordinate space has origin in center
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// and spans from -1 to 1 on both axes
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// here is why we need to transform our coords
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// in fragment shader
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">vertices</span> <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>,
+                     <span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>,
+  ]
+  <span style="color:#75715e">// Loading our data as ARRAY_BUFFER
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bindBuffer</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">ARRAY_BUFFER</span>, <span style="color:#a6e22e">vertex_buffer</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bufferData</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">ARRAY_BUFFER</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Float32Array</span>(<span style="color:#a6e22e">vertices</span>), <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">STATIC_DRAW</span>);
+
+
+  <span style="color:#75715e">// Finding location of variable &#34;coords&#34; in GL memory
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// and binding ARRAY_BUFFER to it
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">coord</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">getAttribLocation</span>(<span style="color:#a6e22e">prog</span>, <span style="color:#e6db74">&#34;coords&#34;</span>);
+  <span style="color:#75715e">// Variable binds to last buffer that was written to GL memory
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">vertexAttribPointer</span>(<span style="color:#a6e22e">coord</span>, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">FLOAT</span>, <span style="color:#66d9ef">false</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">enableVertexAttribArray</span>(<span style="color:#a6e22e">coord</span>);
+  <span style="color:#75715e">// ARRAY_BUFFER is now free and can be reused
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> [<span style="color:#a6e22e">coord</span>, <span style="color:#a6e22e">vertex_buffer</span>];
+}
+</code></pre></div><p>Array data is loaded.
+Time for textures.
+Better to find one that has sizes of powers of two.
+WebGL able to automatically generate <a href="https://en.wikipedia.org/wiki/Mipmap">mipmaps</a> for such textures and scale them properly.<br>
+At first we create simple 1x1 blue pixel texture and immediately return it.
+Later, when image loads, we replace this pixel with proper texture data.</p>
+<h4 id="indexjs-2">index.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">loadTexture</span>(<span style="color:#a6e22e">gl</span>, <span style="color:#a6e22e">prog</span>, <span style="color:#a6e22e">url</span>) {
+  <span style="color:#75715e">// Creating 1x1 blue tuxture
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">texture</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">createTexture</span>();
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">level</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">internalFormat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">RGBA</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">border</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">srcFormat</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">RGBA</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">srcType</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">UNSIGNED_BYTE</span>;
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">pixel</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uint8Array</span>([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>]);  <span style="color:#75715e">// opaque blue (RGBA)
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// bindTexture works similar to bindBuffer
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bindTexture</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">texture</span>);
+  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">texImage2D</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">level</span>, <span style="color:#a6e22e">internalFormat</span>,
+                <span style="color:#a6e22e">width</span>, <span style="color:#a6e22e">height</span>, <span style="color:#a6e22e">border</span>, <span style="color:#a6e22e">srcFormat</span>, <span style="color:#a6e22e">srcType</span>,
+                <span style="color:#a6e22e">pixel</span>);
+
+  <span style="color:#75715e">// Loading image
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">image</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Image</span>();
+  <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bindTexture</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">texture</span>);
+    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">texImage2D</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">level</span>, <span style="color:#a6e22e">internalFormat</span>,
+                  <span style="color:#a6e22e">srcFormat</span>, <span style="color:#a6e22e">srcType</span>, <span style="color:#a6e22e">image</span>);
+
+    <span style="color:#75715e">// WebGL1 has different requirements for power of 2 images
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// vs non power of 2 images so check if the image is a
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// power of 2 in both dimensions.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isPowerOf2</span>(<span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">width</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isPowerOf2</span>(<span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">height</span>)) {
+       <span style="color:#75715e">// Yes, it&#39;s a power of 2. Generate mips.
+</span><span style="color:#75715e"></span>       <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">generateMipmap</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>);
+    } <span style="color:#66d9ef">else</span> {
+       <span style="color:#75715e">// No, it&#39;s not a power of 2. Turn off mips and set
+</span><span style="color:#75715e"></span>       <span style="color:#75715e">// wrapping to clamp to edge
+</span><span style="color:#75715e"></span>       <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">texParameteri</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_WRAP_S</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">CLAMP_TO_EDGE</span>);
+       <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">texParameteri</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_WRAP_T</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">CLAMP_TO_EDGE</span>);
+       <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">texParameteri</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_MIN_FILTER</span>, <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">LINEAR</span>);
+    }
+    <span style="color:#75715e">// Quik re-render to display new texture
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// See implementation below
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">render</span>(<span style="color:#ae81ff">0</span>);
+  };
+  <span style="color:#75715e">// Triggering load
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">url</span>;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">texture</span>;
+}
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isPowerOf2</span>(<span style="color:#a6e22e">value</span>) {
+    <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">&amp;</span> (<span style="color:#a6e22e">value</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+}
+
+</code></pre></div><p>Preparations done. Now is time to tie everything together.</p>
+<h4 id="indexjs-3">index.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>(){
+  <span style="color:#75715e">// Getting WebGL context from canvas
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;c&#34;</span>);
+  <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">width</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">600</span>;
+  <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">height</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">600</span>;
+  <span style="color:#75715e">// Getting slider
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">range</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;range&#34;</span>);
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">getContext</span>(<span style="color:#e6db74">&#34;webgl&#34;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">prog</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">prepareWebGL</span>(<span style="color:#a6e22e">gl</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">coord</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setArrays</span>(<span style="color:#a6e22e">gl</span>, <span style="color:#a6e22e">prog</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">texture</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">loadTexture</span>(<span style="color:#a6e22e">gl</span>, <span style="color:#a6e22e">prog</span>, <span style="color:#e6db74">&#34;img.jpg&#34;</span>);
+
+  <span style="color:#75715e">// Handle to control amount of twist
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">iter</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">getUniformLocation</span>(<span style="color:#a6e22e">prog</span>, <span style="color:#e6db74">&#34;iter&#34;</span>);
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">uSampler</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">getUniformLocation</span>(<span style="color:#a6e22e">prog</span>, <span style="color:#e6db74">&#39;uSampler&#39;</span>);
+  <span style="color:#75715e">// As is said samplers are just integers
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Tell the shader to use texture 0
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">uniform1i</span>(<span style="color:#a6e22e">uSampler</span>, <span style="color:#ae81ff">0</span>)
+
+  <span style="color:#75715e">// This is main workhorse
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">render</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">it</span>) =&gt; {
+    <span style="color:#75715e">// Binding texture to slot 0
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">activeTexture</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE0</span>);
+    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">bindTexture</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TEXTURE_2D</span>, <span style="color:#a6e22e">texture</span>);
+
+    <span style="color:#75715e">// Filling screen with black color
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">clearColor</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">1.0</span>);
+    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">COLOR_BUFFER_BIT</span>);
+
+    <span style="color:#75715e">// Setting iter to slider value
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">uniform1f</span>(<span style="color:#a6e22e">iter</span>, <span style="color:#a6e22e">it</span>);
+    <span style="color:#75715e">// Triggering webgl render
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">drawArrays</span>(<span style="color:#a6e22e">gl</span>.<span style="color:#a6e22e">TRIANGLES</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>);
+  }
+
+  <span style="color:#a6e22e">render</span>(<span style="color:#ae81ff">0</span>);
+
+  <span style="color:#a6e22e">range</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#34;input&#34;</span>, (<span style="color:#a6e22e">e</span>) =&gt; {
+    <span style="color:#a6e22e">render</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">target</span>.<span style="color:#a6e22e">value</span>);
+  })
+}
+
+<span style="color:#a6e22e">main</span>()
+</code></pre></div><p>That&rsquo;s it.
+You can try to follow along and write it yourself.
+If you totally stuck on something, the working source from demos above is <a href="https://github.com/Deedone/techadv-src/tree/master/static/test-webgl">here</a>.</p>
+<h2 id="bonus-blur-shader">Bonus: Blur shader</h2>
+<p>GLSL is quite restrictive.
+For example you can&rsquo;t write loops with non-constant bounds.
+This may seem strange at first, but actually have decent reasoning behind it.
+Most of the restrictions are needed to help compilers apply some aggressive optimization techniques.
+So, here is the blur shader.</p>
+<h4 id="fragmentglsl-1">fragment.glsl</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-glsl" data-lang="glsl"><span style="color:#66d9ef">varying</span> <span style="color:#66d9ef">highp</span> <span style="color:#66d9ef">vec2</span> vTextureCoord;
+<span style="color:#66d9ef">uniform</span> <span style="color:#66d9ef">sampler2D</span> uSampler;
+<span style="color:#66d9ef">precision</span> <span style="color:#66d9ef">mediump</span> <span style="color:#66d9ef">float</span>;
+<span style="color:#66d9ef">uniform</span> <span style="color:#66d9ef">float</span> iter;
+<span style="color:#66d9ef">uniform</span> <span style="color:#66d9ef">float</span> uTextureSize;
+
+<span style="color:#66d9ef">void</span> main(<span style="color:#66d9ef">void</span>){
+    <span style="color:#66d9ef">float</span> pixel <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> uTextureSize;
+    <span style="color:#66d9ef">vec2</span> coords;
+    <span style="color:#66d9ef">vec4</span> color <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec4</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>);
+
+    <span style="color:#66d9ef">float</span> div <span style="color:#f92672">=</span> (iter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>) <span style="color:#f92672">*</span> (iter <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.0</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4.0</span>;
+
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; i<span style="color:#f92672">++</span>) {
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">float</span>(i) <span style="color:#f92672">&gt;</span> iter){
+            <span style="color:#66d9ef">break</span>;
+        }
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; j<span style="color:#f92672">++</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">float</span>(j) <span style="color:#f92672">&gt;</span> iter){
+                <span style="color:#66d9ef">break</span>;
+            }
+            coords <span style="color:#f92672">=</span> vTextureCoord.st <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>;
+            coords <span style="color:#f92672">+=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#66d9ef">float</span>(i), <span style="color:#66d9ef">float</span>(j)) <span style="color:#f92672">*</span> pixel;
+            color <span style="color:#f92672">+=</span> texture2D(uSampler, coords).rgba <span style="color:#f92672">/</span> div;
+
+            coords <span style="color:#f92672">=</span> vTextureCoord.st <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>;
+            coords <span style="color:#f92672">-=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#66d9ef">float</span>(i), <span style="color:#66d9ef">float</span>(j)) <span style="color:#f92672">*</span> pixel;
+            color <span style="color:#f92672">+=</span> texture2D(uSampler, coords).rgba <span style="color:#f92672">/</span> div;
+        }
+        <span style="color:#66d9ef">int</span> i2 <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>i;
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">100</span>; j<span style="color:#f92672">++</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">float</span>(j) <span style="color:#f92672">&gt;</span> iter){
+                <span style="color:#66d9ef">break</span>;
+            }
+            coords <span style="color:#f92672">=</span> vTextureCoord.st <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>;
+            coords <span style="color:#f92672">+=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#66d9ef">float</span>(i2), <span style="color:#66d9ef">float</span>(j)) <span style="color:#f92672">*</span> pixel;
+            color <span style="color:#f92672">+=</span> texture2D(uSampler, coords).rgba <span style="color:#f92672">/</span> div;
+
+            coords <span style="color:#f92672">=</span> vTextureCoord.st <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.5</span>;
+            coords <span style="color:#f92672">-=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#66d9ef">float</span>(i2), <span style="color:#66d9ef">float</span>(j)) <span style="color:#f92672">*</span> pixel;
+            color <span style="color:#f92672">+=</span> texture2D(uSampler, coords).rgba <span style="color:#f92672">/</span> div;
+        }
+    }
+
+    gl_FragColor <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec4</span>(color.rgb, <span style="color:#ae81ff">1.0</span>);
+}
+</code></pre></div><p>It&rsquo;s not the best, but it works.
+And I hope you can learn something from it.</p>
+<h1 id="ideas">Ideas</h1>
+<p>You can use this project as a template for future experiments.</p>
+<p>Here are some cool ideas:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel Edge detection</a></li>
+<li><a href="https://hue.imageonline.co/">Hue shift</a></li>
+<li>Variuos photo filters</li>
+</ul>
+<p>Good luck in your programming journey and <em><strong>Remember to create exponentially</strong></em></p>
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+    </div>
+
+
+        
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    <a class="social-icon" href="https://t.me/deedone" target="_blank" rel="noopener" title="Telegram">
+	    <svg fill="#ABABAB" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 19.976562 3.1210938 L 19.611328 3.2695312 C 19.611328 3.2695312 6.6375504 8.5740484 2.6132812 10.267578 L 2.0019531 10.525391 L 2.0019531 12.779297 L 6.9472656 14.755859 L 8.6796875 19.996094 L 10.251953 20.005859 L 12.955078 17.720703 L 16.355469 20.996094 L 18.808594 20.996094 L 21.964844 3.875 L 19.976562 3.1210938 z M 19.646484 5.4179688 L 17.146484 18.980469 L 13.044922 15.029297 L 10.224609 17.410156 L 11 14.375 L 17.28125 8 L 17.082031 7.7988281 C 17.082031 7.7988281 10.706702 11.473998 8.0019531 13.023438 L 4.5371094 11.638672 C 9.0770415 9.7455758 18.697943 5.8058761 19.646484 5.4179688 z"/></svg>
+    </a>
+    
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://techadv.xyz/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>

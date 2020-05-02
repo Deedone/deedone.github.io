@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Tech Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2020 20:45:02 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2020 20:00:38 +0300</lastBuildDate>
     
 	<atom:link href="https://techadv.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WebGL tutorial: image processing</title>
+      <link>https://techadv.xyz/posts/webgl/</link>
+      <pubDate>Sat, 25 Apr 2020 20:00:38 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/posts/webgl/</guid>
+      <description>&lt;p&gt;In this tutorial you will learn how to use the power of GPU from javascript.
+With some WebGL shader examples such as blur and twist.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>First impressions on Rust and Webassembly</title>

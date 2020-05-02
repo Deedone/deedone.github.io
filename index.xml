@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>WebGL tutorial: image processing</title>
+      <link>https://techadv.xyz/posts/webgl/</link>
+      <pubDate>Sat, 25 Apr 2020 20:00:38 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/posts/webgl/</guid>
+      <description>&lt;p&gt;In this tutorial you will learn how to use the power of GPU from javascript.
+With some WebGL shader examples such as blur and twist.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>First impressions on Rust and Webassembly</title>
       <link>https://techadv.xyz/posts/rust-wasm/</link>
       <pubDate>Mon, 20 Apr 2020 20:45:02 +0300</pubDate>
