@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Tech Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Apr 2020 20:45:02 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2020 20:00:38 +0300</lastBuildDate>
     
 	<atom:link href="https://techadv.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>javascript</title>
+      <link>https://techadv.xyz/tags/javascript/</link>
+      <pubDate>Sat, 25 Apr 2020 20:00:38 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webgl</title>
+      <link>https://techadv.xyz/tags/webgl/</link>
+      <pubDate>Sat, 25 Apr 2020 20:00:38 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/tags/webgl/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>rust</title>

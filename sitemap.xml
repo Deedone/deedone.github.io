@@ -3,7 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://techadv.xyz/tags/javascript/</loc>
+    <lastmod>2020-04-25T20:00:38+03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://techadv.xyz/posts/</loc>
+    <lastmod>2020-04-25T20:00:38+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://techadv.xyz/tags/</loc>
+    <lastmod>2020-04-25T20:00:38+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://techadv.xyz/tags/webgl/</loc>
     <lastmod>2020-04-25T20:00:38+03:00</lastmod>
   </url>
   
@@ -24,11 +39,6 @@
   
   <url>
     <loc>https://techadv.xyz/tags/simulation/</loc>
-    <lastmod>2020-04-20T20:45:02+03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://techadv.xyz/tags/</loc>
     <lastmod>2020-04-20T20:45:02+03:00</lastmod>
   </url>
   
