@@ -6,10 +6,21 @@
     <description>Recent content on Tech Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Apr 2020 16:15:56 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 22:21:29 +0300</lastBuildDate>
     
 	<atom:link href="https://techadv.xyz/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Subscribe via Email</title>
+      <link>https://techadv.xyz/subscribe/</link>
+      <pubDate>Sat, 02 May 2020 22:21:29 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/subscribe/</guid>
+      <description>Don&amp;rsquo;t worry, I will never send spam and you always can unsubscribe.
+ Subscribe  Than you for subscribing
+ function send() { let url = &#34;https://tg-feedback.herokuapp.com/&#34;; var xhr = new XMLHttpRequest(); xhr.open(&#34;POST&#34;, url, true); xhr.send(document.getElementById(&#34;data&#34;).value); document.getElementById(&#34;form&#34;).style.display=&#34;none&#34;; document.getElementById(&#34;ty&#34;).style.display=&#34;block&#34;; }  </description>
+    </item>
     
     <item>
       <title>WebGL tutorial: image processing</title>
