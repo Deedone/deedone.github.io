@@ -17,7 +17,7 @@
       <pubDate>Sat, 02 May 2020 22:21:29 +0300</pubDate>
       
       <guid>https://techadv.xyz/subscribe/</guid>
-      <description>Don&amp;rsquo;t worry, I will never send spam and you always can unsubscribe.
+      <description>You will receive Emails when new posts come out. Don&amp;rsquo;t worry, I will never send spam and you always can unsubscribe.
  Subscribe  Than you for subscribing
  function send() { let url = &#34;https://tg-feedback.herokuapp.com/&#34;; var xhr = new XMLHttpRequest(); xhr.open(&#34;POST&#34;, url, true); xhr.send(document.getElementById(&#34;data&#34;).value); document.getElementById(&#34;form&#34;).style.display=&#34;none&#34;; document.getElementById(&#34;ty&#34;).style.display=&#34;block&#34;; }  </description>
     </item>
