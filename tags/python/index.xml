@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Tech Adventures</title>
+    <link>https://techadv.xyz/tags/python/</link>
+    <description>Recent content in python on Tech Adventures</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 May 2020 18:46:13 +0300</lastBuildDate>
+    
+	<atom:link href="https://techadv.xyz/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Drawing on QR Codes</title>
+      <link>https://techadv.xyz/posts/qrart/</link>
+      <pubDate>Mon, 25 May 2020 18:46:13 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/posts/qrart/</guid>
+      <description>We&amp;rsquo;ve all seen fancy QR codes with images. Usually, they have a small logo or something in the center. They are very easy to make, and to be honest not very impressive. Just generate your QR and put some image on top, that&amp;rsquo;s all.
+That works because all QRs have some amount of data reserved for error correction. You can flip some bits, obscure parts of the code, or use a noisy camera and it would still be readable.</description>
+    </item>
+    
+  </channel>
+</rss>

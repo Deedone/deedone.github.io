@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>Drawing on QR Codes | Tech Adventures</title>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#FF3DB4">
+    <meta name="theme-color" content="#ffffff">
+    <meta
+
+    name="description"
+    content="Influencing QR code generation to produce art"/>
+
+    
+    
+    
+    <link rel="stylesheet" href="https://techadv.xyz/css/main.min.cf11ec552c63f5eeb3f27e29f50227596070c1d3c68b53476cf9b41a798264bd.css"/>
+
+    
+    
+    
+
+    
+    
+ 
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163808068-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-163808068-1');
+</script>
+
+      </head>
+
+    <body>
+        
+<nav>
+  <header>
+    <div class="site-title">
+        <a href="/">Tech Adventures</a>
+    </div>  
+</header>
+
+  <div class="nav-menu">
+  
+    <a class="color-link nav-link" href="/">Home</a>
+  
+    <a class="color-link nav-link" href="/subscribe">Subscribe</a>
+  
+    <a class="color-link nav-link" href="/about">About</a>
+  
+  <a class="color-link nav-link" href="https://techadv.xyz/index.xml" target="_blank" rel="noopener" type="application/rss+xml">RSS</a>
+</div>
+<footer class="footer">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    <a class="social-icon" href="https://t.me/deedone" target="_blank" rel="noopener" title="Telegram">
+	    <svg fill="#ABABAB" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 19.976562 3.1210938 L 19.611328 3.2695312 C 19.611328 3.2695312 6.6375504 8.5740484 2.6132812 10.267578 L 2.0019531 10.525391 L 2.0019531 12.779297 L 6.9472656 14.755859 L 8.6796875 19.996094 L 10.251953 20.005859 L 12.955078 17.720703 L 16.355469 20.996094 L 18.808594 20.996094 L 21.964844 3.875 L 19.976562 3.1210938 z M 19.646484 5.4179688 L 17.146484 18.980469 L 13.044922 15.029297 L 10.224609 17.410156 L 11 14.375 L 17.28125 8 L 17.082031 7.7988281 C 17.082031 7.7988281 10.706702 11.473998 8.0019531 13.023438 L 4.5371094 11.638672 C 9.0770415 9.7455758 18.697943 5.8058761 19.646484 5.4179688 z"/></svg>
+    </a>
+    
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+	<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+
+	<script src="https://techadv.xyz/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+</nav>
+
+        <div id="content" class="content-container">
+        
+
+<h1 class="post-title">Drawing on QR Codes</h1>
+    
+    <time>May 25, 2020</time>
+    
+    <div>
+        <p>
+        <p>We&rsquo;ve all seen fancy QR codes with images.
+Usually, they have a small logo or something in the center.
+They are very easy to make, and to be honest not very impressive.
+Just generate your QR and put some image on top, that&rsquo;s all.<br>
+That works because all QRs have some amount of data reserved for error correction.
+You can flip some bits, obscure parts of the code, or use a noisy camera and it would still be readable.</p>
+<p>But have you ever wanted to <strong>REALLY</strong> embed an image into QR code?
+Not just slap something on top, but force the code to be generated with an image embedded in it.<br>
+Something like this:</p>
+<div align="center">
+<figure width="100%" align="center">
+<img src="/images/qrchest.png" width="100%">
+<figcaption align="center"> This is perfectly valid and readable QR code. It contains a link to this very article. </figcaption>
+</figure>
+</div>
+<p>Yep, this is possible, though not as easy.
+I, as a <a href="https://en.wikipedia.org/wiki/Hacker_culture">hacker</a>, was completely fascinated when I first saw something like this.
+I just had to understand how this works.
+Through some experimentation and reading QR specs, I finally figured it out.
+My method is not perfect, or incredibly fast, but it works.
+If you want to make it faster, then wish you luck reading the specs.
+For me brute force was good enough.</p>
+<h3 id="so-how-it-works">So how it works?</h3>
+<p>Basically, squares of the QR code represent bits of the data you put in.
+So, by putting in different characters, you can influence the resulting pattern.
+We just need to find the right data to put in.
+And somehow make it not interfere with the message that we want to encode.
+For links this is fairly easy.</p>
+<p>All URLs can contain anchors.
+This is stuff after the &lsquo;#&rsquo; character.
+Basically what it does, is telling the browser that string after it is an id.
+The browser would scroll to element with this id after loading the page.
+If there is no such element, the anchor is just ignored.
+So we can put anything after it, and the link would remain clickable.</p>
+<p>For example:
+<code>https://techadv.xyz#0006011024100006063346000006002046160006030305000001024701000000...</code></p>
+<p>Looks promising.
+So we can put in any amount of random data, now we just need to find the correct one.
+Here are things that you should keep in mind to be able to perform such a trick.
+Also, I will provide an example code in the end.</p>
+<h2 id="encoding-mode">Encoding mode</h2>
+<p>The first thing that comes in mind is to just try every possible combination of characters.
+This approach is so slow that you will likely die of old age before it&rsquo;s done.
+The smarter one is to try to understand how data is encoded and optimize it somehow.</p>
+<p>First of all, each input character is only responsible for some distinct bits on the image
+(if we ignore error correction part).
+This fact gives us the ability to brute force them separately.<br>
+And reduces the complexity from 10<sup>N</sup> to 10*N which is much smaller.</p>
+<p>QR codes have 4 possible modes of encoding:</p>
+<ul>
+<li>Numeric</li>
+<li>Alphanumeric</li>
+<li>Byte</li>
+<li>Kanji</li>
+</ul>
+<p>Byte mode will give us great control over the data.
+But random bytes will almost certainly break link detection so it&rsquo;s no good.</p>
+<p>Alphanumeric mode is okay for links but it cannot produce many of the bit patterns. And we need <strong>ALL</strong> of them.</p>
+<p>Numeric mode is okay with links too.
+And it uses special compression to fit more data.
+The numbers are broken into groups of three and then treated like a single 3-digit number before converting to 10-digit binary.
+10-digit binary numbers can have 1024 possible states.
+So we have <code>1000 / 1024 * 100% = 97.6%</code> coverage of bit patterns.
+Sounds good but what about this error correction?</p>
+<h2 id="error-correction">Error correction</h2>
+<p>All QR codes <strong>must</strong> have at least some error correction.
+It can range from 7 to 30 percent of possibly recoverable data.
+I recommend setting the lowest possible value to leave more space for your image.</p>
+<p>The whole error correction section changes very unpredictably after any slight change in the input data.
+If you try to place your image in this section, random changes will confuse the algorithm and it will produce some garbage.
+EC section is appended to the end of your original message.
+On the generated code it&rsquo;s on the left side.
+Make sure to avoid it, should be easily detectable if you try to encode a large group of identical characters.</p>
+<h2 id="masking">Masking</h2>
+<p><em>That one gave me a lot of troubles until I discovered a workaround.</em><br>
+Masks were designed to make codes easier to read.
+They achieve it by breaking large chunks of the same bits into smaller ones.
+That trick helps the software to count blocks more precisely.
+They are not essential for reading, but all generators try hard to choose the best one.</p>
+<p>But images usually need to contain large blocks of similar color.
+As soon as you&rsquo;ve made some progress, mask changes and everything looks random again.
+Luckily, I&rsquo;ve found a python library for QR code generation that allows us to override mask selection.<br>
+There are 8 of them. If expression is true, current bit flips.</p>
+<ol start="0">
+<li>(row + column) mod 2 == 0</li>
+<li>(row) mod 2 == 0</li>
+<li>(column) mod 3 == 0</li>
+<li>(row + column) mod 3 == 0</li>
+<li>( floor(row / 2) + floor(column / 3) ) mod 2 == 0</li>
+<li>((row * column) mod 2) + ((row * column) mod 3) == 0</li>
+<li>( ((row * column) mod 2) + ((row * column) mod 3) ) mod 2 == 0</li>
+<li>( ((row + column) mod 2) + ((row * column) mod 3) ) mod 2 == 0</li>
+</ol>
+<p>You can choose any one of them, it should be fine.
+Just make sure it&rsquo;s not changing in the middle of your brute force.</p>
+<h2 id="overall-structure">Overall structure</h2>
+<p>There are many versions of QR codes.
+The bigger the version, the more data you can put in.
+Unfortunately bigger ones should always have alignment patterns (this little squares with one dot inside).
+But you can at least try to place your art in such a way that they would fit naturally.</p>
+<h2 id="the-code">The code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/python3</span>
+
+<span style="color:#f92672">import</span> qrcode
+<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+<span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint, choice
+
+
+<span style="color:#75715e">#Load image and convert it to 2d array of booleans</span>
+<span style="color:#75715e">#False is white pixels True is black pixel</span>
+img <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#34;./img.png&#34;</span>)
+(w, h) <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>size
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Got image size:&#34;</span>,w, h)
+bitmap <span style="color:#f92672">=</span> [[False <span style="color:#66d9ef">if</span> sum(img<span style="color:#f92672">.</span>getpixel((j,i))) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> <span style="color:#66d9ef">else</span> True <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(w)] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(h)]
+<span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> bitmap:
+    <span style="color:#66d9ef">print</span>(row)
+img<span style="color:#f92672">.</span>close()
+
+
+<span style="color:#75715e">#Function to calculate the percentage of similarity</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calc</span>(qr, data, starty, startx):
+    h <span style="color:#f92672">=</span> len(data)
+    w <span style="color:#f92672">=</span> len(data[<span style="color:#ae81ff">0</span>])
+    matr <span style="color:#f92672">=</span> qr<span style="color:#f92672">.</span>get_matrix()
+    total <span style="color:#f92672">=</span> h<span style="color:#f92672">*</span>w
+    match <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, h):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, w):
+            <span style="color:#66d9ef">if</span> matr[starty<span style="color:#f92672">+</span>i][startx<span style="color:#f92672">+</span>j] <span style="color:#f92672">==</span> data[i][j]:
+                match<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>
+
+    <span style="color:#66d9ef">return</span> match <span style="color:#f92672">/</span> total
+
+
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://techadv.xyz/posts/qrart/#&#34;</span>
+<span style="color:#75715e">#This is hand-picked by trial and error</span>
+<span style="color:#75715e">#Try to fit as much as u can</span>
+PSIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1461</span>
+<span style="color:#75715e">#Fill payload with zeroes</span>
+payload <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(PSIZE)]
+best <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#75715e"># Position of image within the QR code</span>
+startx <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+starty  <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+qr <span style="color:#f92672">=</span> qrcode<span style="color:#f92672">.</span>QRCode(version<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>,<span style="color:#75715e">#Size of code</span>
+        error_correction<span style="color:#f92672">=</span>qrcode<span style="color:#f92672">.</span>constants<span style="color:#f92672">.</span>ERROR_CORRECT_L, <span style="color:#75715e"># Lowes error correction</span>
+        box_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, <span style="color:#75715e">#Size of one qr module</span>
+        border<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+        )
+
+<span style="color:#75715e"># Overriding mask pattern</span>
+qr<span style="color:#f92672">.</span>mask_pattern <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#75715e"># Looping over triples </span>
+<span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>,PSIZE,<span style="color:#ae81ff">3</span>):
+    <span style="color:#66d9ef">print</span>(p)
+    <span style="color:#75715e"># Searching for the best fitting one</span>
+    bestletter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;000&#39;</span>
+    localbest <span style="color:#f92672">=</span> best
+    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
+        sc <span style="color:#f92672">=</span> str(c)
+        <span style="color:#66d9ef">while</span> len(sc) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>:
+            sc <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">+</span>sc
+        payload[p] <span style="color:#f92672">=</span> sc[<span style="color:#ae81ff">0</span>]
+        payload[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> sc[<span style="color:#ae81ff">1</span>]
+        payload[p<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> sc[<span style="color:#ae81ff">2</span>]
+        qr<span style="color:#f92672">.</span>clear()
+        qr<span style="color:#f92672">.</span>add_data(url<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(payload))
+        res <span style="color:#f92672">=</span> calc(qr, bitmap, starty, startx)
+
+        <span style="color:#66d9ef">if</span> res <span style="color:#f92672">&gt;</span> localbest:
+            bestletter <span style="color:#f92672">=</span> sc
+            localbest <span style="color:#f92672">=</span> res
+
+    payload[p] <span style="color:#f92672">=</span> bestletter[<span style="color:#ae81ff">0</span>]
+    payload[p<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> bestletter[<span style="color:#ae81ff">1</span>]
+    payload[p<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> bestletter[<span style="color:#ae81ff">2</span>]
+
+    <span style="color:#75715e">#Update global best and save results</span>
+    qr<span style="color:#f92672">.</span>clear()
+    qr<span style="color:#f92672">.</span>add_data(url<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(payload))
+    best <span style="color:#f92672">=</span> calc(qr, bitmap, starty, startx)
+    qr<span style="color:#f92672">.</span>border <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+    qr<span style="color:#f92672">.</span>make()
+    img <span style="color:#f92672">=</span> qr<span style="color:#f92672">.</span>make_image(fill_color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>, back_color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>)
+    qr<span style="color:#f92672">.</span>border <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    img<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;res.png&#34;</span>)
+
+    <span style="color:#75715e">#This is not neccesary but nice to have</span>
+    <span style="color:#75715e">#Draw image on top of qr code so you can</span>
+    <span style="color:#75715e">#compare current result to the ideal one</span>
+    bord <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+    pix <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>load()
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, h):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, w):
+            <span style="color:#66d9ef">if</span> bitmap[i][j]:
+                pix[startx<span style="color:#f92672">+</span>j<span style="color:#f92672">+</span>bord,starty<span style="color:#f92672">+</span>bord<span style="color:#f92672">+</span>i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#66d9ef">else</span>:
+                pix[startx<span style="color:#f92672">+</span>bord<span style="color:#f92672">+</span>j,starty<span style="color:#f92672">+</span>bord<span style="color:#f92672">+</span>i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+    img<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;res_ideal.png&#34;</span>)
+
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>)
+<span style="color:#66d9ef">print</span>(qr<span style="color:#f92672">.</span>mask_pattern,best)
+<span style="color:#66d9ef">print</span>(url<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">.</span>join(payload))
+</code></pre></div><h2 id="the-end">The end</h2>
+<p>Good luck trying this trick.
+It can take some time, so I recommend practicing with smaller ones.
+Be sure to share results with me if you create something.
+You can send them in <a href="https://t.me/deedone">telegram</a>.
+If you don&rsquo;t have telegram, just drop the link in the <a href="/subscribe">subscription form</a> (you can write anything in there), I will see it eventually.</p>
+<p><em><strong>Remember to create exponentially</strong></em></p>
+
+        </p>
+    </div>
+    
+
+    
+
+    <div class="page-footer">
+        
+        <hr class="footer-divider">
+        
+            <a class="tag" href="/tags/python">#python</a>
+        
+            <a class="tag" href="/tags/barcodes">#barcodes</a>
+        
+      
+    </div>
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+        </div>
+        <footer class="footer-mobile">
+	<div class="social-icons">
+        
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <a class="social-icon" href="https://github.com/Deedone" target="_blank" rel="noopener" title="GitHub">
+        <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" fill="#ABABAB" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">
+            <path d="M13.9988029,1.32087331 C6.82105037,1.32087331 1,7.14112562 1,14.3212723 C1,20.0649109 4.72454649,24.9370678 9.89038951,26.6560892 C10.5408085,26.7757983 10.7778323,26.374374 10.7778323,26.0296121 C10.7778323,25.7215609 10.7666595,24.9035493 10.760275,23.8189856 C7.14426471,24.6042767 6.38131925,22.0760223 6.38131925,22.0760223 C5.78995672,20.5740732 4.93762853,20.1742451 4.93762853,20.1742451 C3.75729765,19.3682044 5.02701126,19.3841656 5.02701126,19.3841656 C6.33183953,19.4759425 7.01817121,20.7241085 7.01817121,20.7241085 C8.17775254,22.7104801 10.0611744,22.1366749 10.8017741,21.8038838 C10.919887,20.9643246 11.2558703,20.3913175 11.6269683,20.066507 C8.74038491,19.7385043 5.70536235,18.6228163 5.70536235,13.6413251 C5.70536235,12.2223743 6.21213051,11.0611968 7.04370914,10.1530044 C6.90963504,9.82420367 6.46351945,8.50181809 7.17139875,6.71256734 C7.17139875,6.71256734 8.26234691,6.36301702 10.7459099,8.04532771 C11.78259,7.75642995 12.8950858,7.61277914 14.000399,7.60719272 C15.1049142,7.61277914 16.2166119,7.75642995 17.2548881,8.04532771 C19.736855,6.36301702 20.8262071,6.71256734 20.8262071,6.71256734 C21.5356825,8.50181809 21.0895669,9.82420367 20.9562909,10.1530044 C21.7894656,11.0611968 22.2922435,12.2223743 22.2922435,13.6413251 C22.2922435,18.6355852 19.2524325,19.734514 16.3570705,20.0561322 C16.8231376,20.4575564 17.2389269,21.2508282 17.2389269,22.4638795 C17.2389269,24.2012564 17.2229657,25.603448 17.2229657,26.0296121 C17.2229657,26.3775663 17.4575954,26.7821827 18.116793,26.6552912 C23.2786458,24.9322794 27,20.0633148 27,14.3212723 C27,7.14112562 21.1789496,1.32087331 13.9988029,1.32087331"></path>
+        </svg>
+    </a>
+    
+
+    
+    <a class="social-icon" href="https://t.me/deedone" target="_blank" rel="noopener" title="Telegram">
+	    <svg fill="#ABABAB" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px"><path d="M 19.976562 3.1210938 L 19.611328 3.2695312 C 19.611328 3.2695312 6.6375504 8.5740484 2.6132812 10.267578 L 2.0019531 10.525391 L 2.0019531 12.779297 L 6.9472656 14.755859 L 8.6796875 19.996094 L 10.251953 20.005859 L 12.955078 17.720703 L 16.355469 20.996094 L 18.808594 20.996094 L 21.964844 3.875 L 19.976562 3.1210938 z M 19.646484 5.4179688 L 17.146484 18.980469 L 13.044922 15.029297 L 10.224609 17.410156 L 11 14.375 L 17.28125 8 L 17.082031 7.7988281 C 17.082031 7.7988281 10.706702 11.473998 8.0019531 13.023438 L 4.5371094 11.638672 C 9.0770415 9.7455758 18.697943 5.8058761 19.646484 5.4179688 z"/></svg>
+    </a>
+    
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+
+
+
+	<div class="footer-mobile-links">
+		<p><a href="https://github.com/kimcc/hugo-theme-noteworthy" target="_blank" rel="noopener">Noteworthy theme</a></p>
+		<span class="divider-bar">|</span>
+		<p><a href="https://gohugo.io" target="_blank" rel="noopener">Built with Hugo</a></p>
+	</div>
+
+	<script src="https://techadv.xyz/js/main.min.fa5c2b23e07b5d9bfad267a52b4b24fdb053e6fb7524993383594926a3ac270c.js" integrity="sha256-+lwrI+B7XZv60melK0sk/bBT5vt1JJkzg1lJJqOsJww=" crossorigin="anonymous"></script>
+</footer>
+    </body>
+</html>
