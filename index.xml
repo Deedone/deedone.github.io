@@ -6,10 +6,16 @@
     <description>Recent content on Tech Adventures</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 May 2020 18:46:13 +0300</lastBuildDate>
-    
-	<atom:link href="https://techadv.xyz/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 13 Oct 2020 14:20:47 +0300</lastBuildDate><atom:link href="https://techadv.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Problems with Google</title>
+      <link>https://techadv.xyz/posts/unexpected-problems/</link>
+      <pubDate>Tue, 13 Oct 2020 14:20:47 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/posts/unexpected-problems/</guid>
+      <description>&lt;p&gt;In this post, I want to share some unpleasant stories about me interacting with Google.
+Mainly as being a browser extension developer.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Drawing on QR Codes</title>

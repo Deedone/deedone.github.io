@@ -2,13 +2,12 @@
 
 <html lang="en-us">
     <head>
-	<meta name="generator" content="Hugo 0.76.3" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no"/>
 
-    <title>Tech Adventures</title>
+    <title>Problems with Google | Tech Adventures</title>
     
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +26,7 @@
     <link rel="stylesheet" href="https://techadv.xyz/css/main.min.cf11ec552c63f5eeb3f27e29f50227596070c1d3c68b53476cf9b41a798264bd.css"/>
 
     <meta property="og:title"
-	  content="Tech Adventures"/>
+	  content="Problems with Google | Tech Adventures"/>
 
     <meta property="og:image"
 	    content="https://techadv.xyz/"/>
@@ -44,8 +43,6 @@
     
     
  
-    
-    <link rel="alternate" type="application/rss+xml" href="https://techadv.xyz/index.xml" title="Tech Adventures" />
     <script data-goatcounter="https://techadv.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script></head>
 
@@ -151,150 +148,106 @@
 
         <div id="content" class="content-container">
         
-<div class = "article-content">
-        
-        <div class="description">
-            <p>Remember to create exponentially</p>
-        </div>
-        
-        
-        
-        
-        <article>
-            <h2>
-                <a href="https://techadv.xyz/posts/unexpected-problems/">
-                    Problems with Google
-                </a>
-            </h2>
-            <div>
-                <p><p>In this post, I want to share some unpleasant stories about me interacting with Google.
-Mainly as being a browser extension developer.</p></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>October 13, 2020</time>
 
-            
-            
-                
-                    <a class="tag" href="/tags/google">#google</a>
-                
-                    <a class="tag" href="/tags/monopolies">#monopolies</a>
-                
-                    <a class="tag" href="/tags/life">#life</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://techadv.xyz/posts/qrart/">
-                    Drawing on QR Codes
-                </a>
-            </h2>
-            <div>
-                <p>We&rsquo;ve all seen fancy QR codes with images. Usually, they have a small logo or something in the center. They are very easy to make, and to be honest not very impressive. Just generate your QR and put some image on top, that&rsquo;s all.
-That works because all QRs have some amount of data reserved for error correction. You can flip some bits, obscure parts of the code, or use a noisy camera and it would still be readable.</p>
-                
-            </div>
-            <div class="post-footer">
-            <time>May 25, 2020</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/python">#python</a>
-                
-                    <a class="tag" href="/tags/barcodes">#barcodes</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://techadv.xyz/posts/webgl/">
-                    WebGL tutorial: image processing
-                </a>
-            </h2>
-            <div>
-                <p><p>In this tutorial you will learn how to use WebGL for image processing.
-We will cover basic stuff like initialization, texture loading, and simple fragment shaders.
-I will try to cover all aspects of interaction with WebGL but you should have a decent understanding of vanilla javascript.
-If you want more in-depth explanations, there is a good book called &ldquo;Learn WebGL&rdquo;, check it out.</p></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>April 25, 2020</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/webgl">#webgl</a>
-                
-                    <a class="tag" href="/tags/javascript">#javascript</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://techadv.xyz/posts/rust-wasm/">
-                    First impressions on Rust and Webassembly
-                </a>
-            </h2>
-            <div>
-                <p><p>I implemented <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway&rsquo;s Game of Life</a> to familiarize myself with this setup. Controls should be self-explanatory. You can also draw on a field. (Drawing only works from PC, not from mobile devices)</p></p>
-                
-            </div>
-            <div class="post-footer">
-            <time>April 20, 2020</time>
-
-            
-            
-                
-                    <a class="tag" href="/tags/rust">#rust</a>
-                
-                    <a class="tag" href="/tags/webassembly">#webassembly</a>
-                
-                    <a class="tag" href="/tags/simulation">#simulation</a>
-                
-            
-            </div> 
-           
-        </article>
-        
-        <article>
-            <h2>
-                <a href="https://techadv.xyz/posts/hello-world/">
-                    Hello World!
-                </a>
-            </h2>
-            <div>
-                <p>Just a small blog where I will document my exploration of interesting technologies.
-Hope it will help me to retain my motivation more easily. Also, I am planning to showcase some projects here soon. Too many projects worth sharing ar now buried with old hard drives.</p>
-                
-            </div>
-            <div class="post-footer">
-            <time>April 19, 2020</time>
-
-            
-            
-            </div> 
-           
-        </article>
-        
+<h1 class="post-title">Problems with Google</h1>
+    
+    <time>October 13, 2020</time>
+    
+    <div>
+        <p>
+        <p>In this post, I want to share some unpleasant stories about me interacting with Google.
+Mainly as being a browser extension developer.</p>
+<h2 id="prelude">Prelude</h2>
+<p>So, I&rsquo;ve been trying to develop a browser plugin for video synchronization.
+It&rsquo;s called Synctastic, and I mainly use it myself to watch some movies with friends.
+After some development, I decided that it would be fun and maybe even helpful to someone to release it to the world.
+Several weeks passed, many fixes were done, and I thought it was ready.</p>
+<p>I decided to first publish for Mozilla, and it was a pleasant experience.
+Everything went smoothly and after a couple of hours, my plugin was already in the wild.
+I even got a human reviewer with an actual human name.
+He also gave me some good tips on what I can improve in the future.</p>
+<p>The first tiny problem that I want to address with Google is the fact that you need to pay to get a developer account.
+It seems kinda strange to pay for the ability to do work for someone.
+But okay, it&rsquo;s not much and maybe it&rsquo;s to prevent spam and yada yada yada.
+The first real problem started a little later.</p>
+<div align="center">
+<figure width="100%" align="center">
+<img src="/images/evil.jpg" width="100%">
+</figure>
+</div>
+<h2 id="chapter-1-permissions">Chapter 1: &ldquo;Permissions&rdquo;</h2>
+<p>From the get got Google started nagging mu about how it&rsquo;s utterly horrible that my extension works on all websites.
+It still keeps doing it every time I upload a new version.
+I mean, WTF, it&rsquo;s a main feature of this software, why the hell do you ask me to remove it every time.</p>
+<p>But nagging is one thing another -  is the review time.
+They said that because of the wide host permissions they will take a long time to review it, and they were not lying.<br>
+A week passed, and I received an email saying that my product didn&rsquo;t pass the review because I use unnecessary permission.
+Okay, I went to double-check everything.
+Found one permission that was not needed and removed it.
+Submitted again.</p>
+<p>Another week passed.
+Got the same email about the incorrect use of permissions.
+Checked everything again, every permission was necessary.
+What the heck, thought I while writing a question in response to this email.
+This time only a couple of hours passed, and they explained that I don&rsquo;t need &ldquo;Tabs&rdquo; permission.
+But I fucking need it. It is necessary to read tab ids.
+And I need to know tab ids to keep internal data structures coherent.
+It is written in their own documentation.
+I replied again with detailed explanations of how everything works and why I need this permission.
+And guess what I got in response.
+Same fucking message:</p>
+<blockquote>
+<p>DURR DURR DURR YOU VIOLATE POLICIES, YOU BAD, <span style="color:red"> <b>REJECTED</b> </span> DURR DURR.</p>
+</blockquote>
+<p>I am still wondering if it was a really stupid AI, or a really shitty employee.<br>
+Eventually, I figured out that I can kinda hack this whole system.
+Basically, I have rewritten all tab id receiving logic to inject JS into the pages and then wait for their response.
+And thus, I was finally able to remove this permission and got approved to our beloved corporate overlord&rsquo;s market.</p>
+<img src="https://media.giphy.com/media/l2SpUoAPo0CBOkyxq/giphy.gif">
+<h2 id="chapter-2-copyright">Chapter 2: &ldquo;Copyright&rdquo;</h2>
+<p>This story is a little shorter but also shows the true nature of monopolists such a Google.
+Everything was quiet for a couple of months.
+Until in the middle of the night, I&rsquo;ve received an email saying something along these lines.</p>
+<blockquote>
+<p>DURR DURR YOU BAD. YOU VIOLATE <span style="color:red"> <b>COPYRIGHT</b> </span>. YOU ALLOW TO BYPASS <span style="color:red"> <b> DRM.   REJECTED</b> </span></p>
+</blockquote>
+<p>And try to guess what is the funniest part.
+I do not even allow to bypass copyright in any way.
+They probably saw the description and decided that I am streaming videos through my server.
+But I am not an idiot that would too hard for free hosting.
+I only stream control commands, like start, stop, skip 10 seconds.
+So to watch a video you need to actually have a page open with this video properly loaded and playable.</p>
+<p>Luckily, after only one message and a couple of days they unbanned me(which I honestly didn&rsquo;t expect).
+But the fact that the original ban was so rapid, without any prior notifications or chances to explain something.
+That&rsquo;s somewhat unnerving.
+Think of it, with its market share in browsers, Google can fucking destroy your whole business with one button click.
+Or even without any clicks. In an automated and efficient way, using cool AI technologies, hurray.</p>
+<h2 id="chapter--to-be-continued">Chapter ?: To be continued</h2>
+<p>I am wondering how many more of such problems I will stumble upon during my developer career.
+But I will be sure to update this list if something happens.
+Nowadays, it&rsquo;s almost impossible to use the internet with interaction with some megacorporation.
+Sad but true.
+But that&rsquo;s not the reason to be depressed and do nothing, so</p>
+<p><em><strong>Remember to create exponentially</strong></em></p>
+        </p>
     </div>
+    
+
+    
+
+    <div class="page-footer">
         
-        <div class="paginator">
+        <hr class="footer-divider">
         
+            <a class="tag" href="/tags/google">#google</a>
         
+            <a class="tag" href="/tags/monopolies">#monopolies</a>
+        
+            <a class="tag" href="/tags/life">#life</a>
+        
+      
     </div>
+
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
