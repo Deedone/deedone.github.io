@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keyboard on Tech Adventures</title>
+    <link>https://techadv.xyz/tags/keyboard/</link>
+    <description>Recent content in keyboard on Tech Adventures</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Apr 2021 14:20:47 +0300</lastBuildDate>
+    
+	<atom:link href="https://techadv.xyz/tags/keyboard/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Yet another Iris build log</title>
+      <link>https://techadv.xyz/posts/iris-log/</link>
+      <pubDate>Sun, 04 Apr 2021 14:20:47 +0300</pubDate>
+      
+      <guid>https://techadv.xyz/posts/iris-log/</guid>
+      <description>&lt;style&gt;
+img {
+    image-orientation: none;
+}
+&lt;/style&gt;
+&lt;p&gt;In this post, I share my adventure of building the Iris keyboard.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
